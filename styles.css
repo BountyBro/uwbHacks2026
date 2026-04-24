@@ -3,6 +3,7 @@
     --pastel-blue: #a8d8e8;
     --pastel-green: #a8e8d8;
     --pastel-purple: #d4a8e8;
+    --vibrant-purple: #c37bdb;
     --white: #ffffff;
     --dark-text: #2c3e50;
     --light-gray: #f5f5f5;
@@ -217,17 +218,23 @@ body {
 }
 
 .module-table {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.module-row {
+    border-bottom: none;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     overflow: hidden;
 }
 
-.module-row {
-    border-bottom: 1px solid var(--border-color);
-}
-
 .module-row:last-child {
-    border-bottom: none;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .module-toggle {
@@ -305,12 +312,12 @@ body {
     content: "→";
     position: absolute;
     left: 0;
-    color: var(--accent-green);
+    color: var(--vibrant-purple);
     font-weight: bold;
 }
 
 .module-content a {
-    color: var(--accent-blue);
+    color: var(--vibrant-purple);
     text-decoration: none;
     font-weight: 500;
 }
@@ -361,15 +368,16 @@ body {
 
 .nav-link.nav-prev,
 .nav-link.nav-next {
-    background-color: var(--pastel-blue);
+    background-color: var(--pastel-purple);
     color: var(--dark-text);
-    border: 1px solid var(--accent-blue);
+    border: 1px solid var(--pastel-purple);
 }
 
 .nav-link.nav-prev:hover,
 .nav-link.nav-next:hover {
-    background-color: var(--accent-blue);
+    background-color: var(--pastel-purple);
     color: var(--white);
+    opacity: 0.9;
 }
 
 /* Knowledge Boxes */
@@ -404,17 +412,7 @@ body {
 
 /* Footer */
 .footer {
-    background-color: var(--pastel-green);
-    color: var(--dark-text);
-    text-align: center;
-    padding: 2rem;
-    margin-top: 4rem;
-    border-top: 1px solid var(--border-color);
-}
-
-.footer p {
-    margin: 0;
-    font-size: 0.95rem;
+    display: none;
 }
 
 /* Contact Page Styles */

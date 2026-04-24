@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Literacy Learning Lab</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">AI Literacy Lab</div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="contribute.html">Contribute</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>AI Literacy Learning Lab</h1>
+            <p>Master the fundamentals of artificial intelligence and develop critical thinking skills for the AI-powered world</p>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <article class="article-content">
+            <section class="modules-section">
+                <h2>Learning Modules</h2>
+                
+                <div class="module-table">
+                    <div class="module-row">
+                        <button class="module-toggle" onclick="toggleModule(this)">
+                            <a href="module1.html" class="module-title">What is AI?</a>
+                            <span class="toggle-icon">+</span>
+                        </button>
+                        <div class="module-content">
+                            <ul>
+                                <li><a href="module1.html#overview">Overview</a></li>
+                                <li><a href="module1.html#built">How are they built?</a></li>
+                                <li><a href="module1.html#work">How does AI work?</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-row">
+                        <button class="module-toggle" onclick="toggleModule(this)">
+                            <a href="module2.html" class="module-title">How to Use AI?</a>
+                            <span class="toggle-icon">+</span>
+                        </button>
+                        <div class="module-content">
+                            <ul>
+                                <li><a href="module2.html#prompting">Prompting</a></li>
+                                <li><a href="module2.html#integration">Software Integration</a></li>
+                                <li><a href="module2.html#ethical">Ethical Concerns</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="module-row">
+                        <button class="module-toggle" onclick="toggleModule(this)">
+                            <a href="module3.html" class="module-title">How to Identify AI Content?</a>
+                            <span class="toggle-icon">+</span>
+                        </button>
+                        <div class="module-content">
+                            <ul>
+                                <li><a href="module3.html#indicators">Common Indicators</a></li>
+                                <li><a href="module3.html#knowledge">Test your knowledge</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="intro-section">
+                <h2>Why AI Literacy Matters</h2>
+                <p>Artificial intelligence is no longer a distant technology—it's integrated into the tools we use daily, the decisions that affect us, and the future we're building. Understanding AI is essential for making informed decisions in an increasingly digital world.</p>
+                <p>This learning lab is designed to equip you with foundational knowledge about artificial intelligence. Whether you're a student, professional, or curious learner, these modules will help you understand how AI works, where it's applied, and how to think critically about AI-generated content.</p>
+                <p>Start with any module that interests you most, or progress through them sequentially for a comprehensive introduction to AI literacy.</p>
+            </section>
+        </article>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 AI Literacy Learning Lab</p>
+    </footer>
+
+    <script>
+        function toggleModule(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.toggle-icon');
+            
+            content.classList.toggle('active');
+            icon.textContent = content.classList.contains('active') ? '−' : '+';
+        }
+    </script>
+</body>
+</html>

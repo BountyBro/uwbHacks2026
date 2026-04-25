@@ -97,10 +97,9 @@ body {
 /* Hero Section */
 .hero {
     background-color: var(--pastel-blue);
-    padding: 5rem 2rem;
+    padding: 5rem 12%;
     text-align: left;
-    width: 80%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .hero-content h1 {

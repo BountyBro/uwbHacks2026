@@ -109,6 +109,38 @@
                         resources. The environmental costs of this compute infrastructure are significant and often
                         overlooked.</li>
                 </ul>
+
+                <section class="ethics-flashcards" id="ethical-flashcards" aria-labelledby="ethical-flashcards-title">
+                    <h3 class="subsection-title" id="ethical-flashcards-title">Learning Checkpoint</h3>
+                    <p>Work through 10 real-world AI ethics scenarios. For each card, choose <strong>Yes</strong> if
+                        the use is responsible or <strong>No</strong> if it raises ethical concerns, then read the
+                        feedback before continuing.</p>
+
+                    <div class="flashcard-shell" data-flashcard-app>
+                        <p class="flashcard-progress" id="flashcardProgress" aria-live="polite"></p>
+
+                        <div class="flashcard-card">
+                            <p class="flashcard-prompt" id="flashcardPrompt"></p>
+                        </div>
+
+                        <div class="flashcard-actions" role="group" aria-label="Ethics answer choices">
+                            <button type="button" class="flashcard-btn flashcard-btn-yes" id="flashcardYes">Yes</button>
+                            <button type="button" class="flashcard-btn flashcard-btn-no" id="flashcardNo">No</button>
+                        </div>
+
+                        <p class="flashcard-feedback" id="flashcardFeedback" aria-live="assertive"></p>
+
+                        <div class="flashcard-controls">
+                            <button type="button" class="nav-link nav-next flashcard-next" id="flashcardNext" disabled>Next Card -></button>
+                        </div>
+
+                        <div class="flashcard-summary is-hidden" id="flashcardSummary" aria-live="polite">
+                            <h4>Session Summary</h4>
+                            <p id="flashcardSummaryText"></p>
+                            <button type="button" class="nav-link nav-prev flashcard-restart" id="flashcardRestart">Restart Flashcards</button>
+                        </div>
+                    </div>
+                </section>
             </section>
 
             <section class="navigation-section">
@@ -117,6 +149,159 @@
             </section>
         </article>
     </main>
+
+    <script>
+        (function initEthicsFlashcards() {
+            const cards = [
+                {
+                    prompt: 'A teacher uses AI to generate practice questions, then personally reviews and edits them before assigning them.',
+                    answer: 'yes',
+                    explanation: 'Yes. Human oversight helps catch mistakes and keeps responsibility with the teacher.'
+                },
+                {
+                    prompt: 'A company uses AI to auto-reject job applicants and provides no way for people to appeal the decision.',
+                    answer: 'no',
+                    explanation: 'No. High-impact decisions require accountability, transparency, and a path for appeal.'
+                },
+                {
+                    prompt: 'A health app quietly collects location and biometric data for AI training without clearly informing users.',
+                    answer: 'no',
+                    explanation: 'No. Ethical AI requires informed consent and transparent data practices.'
+                },
+                {
+                    prompt: 'A city publishes how its AI traffic model works and lets residents report issues or bias in outcomes.',
+                    answer: 'yes',
+                    explanation: 'Yes. Transparency and public feedback channels improve trust and fairness.'
+                },
+                {
+                    prompt: 'A social platform uses AI to create realistic fake videos of public figures to boost engagement.',
+                    answer: 'no',
+                    explanation: 'No. Deepfakes can spread misinformation and cause significant harm.'
+                },
+                {
+                    prompt: 'A support chatbot clearly states it is AI and escalates complex issues to a human agent when needed.',
+                    answer: 'yes',
+                    explanation: 'Yes. Clear disclosure and escalation reduce risk and protect users.'
+                },
+                {
+                    prompt: 'An AI loan model shows lower approval rates for certain groups, and the company ignores audits showing bias.',
+                    answer: 'no',
+                    explanation: 'No. Ignoring documented bias is unfair and violates responsible AI practice.'
+                },
+                {
+                    prompt: 'A research team uses a smaller, efficient model for routine tasks to reduce energy consumption.',
+                    answer: 'yes',
+                    explanation: 'Yes. Choosing efficient models can reduce environmental impact while meeting needs.'
+                },
+                {
+                    prompt: 'A student submits AI-generated writing as their own work even though class policy requires disclosure.',
+                    answer: 'no',
+                    explanation: 'No. Misrepresenting AI-assisted work breaks transparency and academic integrity rules.'
+                },
+                {
+                    prompt: 'A hospital validates AI diagnostic suggestions against clinician judgment before acting on results.',
+                    answer: 'yes',
+                    explanation: 'Yes. Human-in-the-loop review is essential in safety-critical settings.'
+                }
+            ];
+
+            const promptEl = document.getElementById('flashcardPrompt');
+            const progressEl = document.getElementById('flashcardProgress');
+            const feedbackEl = document.getElementById('flashcardFeedback');
+            const nextBtn = document.getElementById('flashcardNext');
+            const yesBtn = document.getElementById('flashcardYes');
+            const noBtn = document.getElementById('flashcardNo');
+            const summaryEl = document.getElementById('flashcardSummary');
+            const summaryTextEl = document.getElementById('flashcardSummaryText');
+            const restartBtn = document.getElementById('flashcardRestart');
+            const appShell = document.querySelector('[data-flashcard-app]');
+
+            if (!appShell || !promptEl || !progressEl || !feedbackEl || !nextBtn || !yesBtn || !noBtn || !summaryEl || !summaryTextEl || !restartBtn) {
+                return;
+            }
+
+            let currentIndex = 0;
+            let score = 0;
+            let hasAnsweredCurrentCard = false;
+
+            function renderCard() {
+                const card = cards[currentIndex];
+                promptEl.textContent = card.prompt;
+                progressEl.textContent = `Card ${currentIndex + 1} of ${cards.length} | Score: ${score}`;
+                feedbackEl.textContent = '';
+                feedbackEl.className = 'flashcard-feedback';
+                hasAnsweredCurrentCard = false;
+
+                yesBtn.disabled = false;
+                noBtn.disabled = false;
+                nextBtn.disabled = true;
+                nextBtn.textContent = currentIndex === cards.length - 1 ? 'See Summary' : 'Next Card ->';
+
+                summaryEl.classList.add('is-hidden');
+            }
+
+            function answerCard(choice) {
+                if (hasAnsweredCurrentCard) {
+                    return;
+                }
+
+                const card = cards[currentIndex];
+                const isCorrect = choice === card.answer;
+                hasAnsweredCurrentCard = true;
+
+                if (isCorrect) {
+                    score += 1;
+                }
+
+                feedbackEl.textContent = `${isCorrect ? 'Correct.' : 'Not quite.'} ${card.explanation}`;
+                feedbackEl.classList.add(isCorrect ? 'flashcard-feedback-correct' : 'flashcard-feedback-incorrect');
+
+                progressEl.textContent = `Card ${currentIndex + 1} of ${cards.length} | Score: ${score}`;
+
+                yesBtn.disabled = true;
+                noBtn.disabled = true;
+                nextBtn.disabled = false;
+                nextBtn.focus();
+            }
+
+            function showSummary() {
+                summaryTextEl.textContent = `You scored ${score} out of ${cards.length}. Review the explanations and restart to practice again.`;
+                summaryEl.classList.remove('is-hidden');
+                nextBtn.disabled = true;
+            }
+
+            yesBtn.addEventListener('click', function () {
+                answerCard('yes');
+            });
+
+            noBtn.addEventListener('click', function () {
+                answerCard('no');
+            });
+
+            nextBtn.addEventListener('click', function () {
+                if (!hasAnsweredCurrentCard) {
+                    return;
+                }
+
+                if (currentIndex === cards.length - 1) {
+                    showSummary();
+                    return;
+                }
+
+                currentIndex += 1;
+                renderCard();
+            });
+
+            restartBtn.addEventListener('click', function () {
+                currentIndex = 0;
+                score = 0;
+                renderCard();
+                yesBtn.focus();
+            });
+
+            renderCard();
+        }());
+    </script>
 </body>
 
 </html>

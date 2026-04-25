@@ -345,6 +345,25 @@ body {
     margin-bottom: 0;
 }
 
+.container {
+    display: flex;      /* For segmenting columns. */
+    flex-wrap: wrap;    /* To accomodate smaller screens. */
+    gap: 70px;          /* Column gap width. */
+}
+
+.column {
+    flex: 1;            /* Setting indiivudal column width to be equal. */
+    min-width: 250px;   /* Smaller screen threshold. */
+    text-align: center; /* Centering text in each column. */
+}
+
+.column img {
+    width: 60%;         /* Fitting image to prevent overflowing. */
+    height: auto;       /* Free aspect control based on width. */
+    border-radius: 50%; /* To make square images circular. */
+    margin: 10px;       /* Reducing cluttering around images. */
+}
+
 /* Navigation Section */
 .navigation-section {
     display: flex;

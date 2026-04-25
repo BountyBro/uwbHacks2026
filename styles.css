@@ -84,14 +84,9 @@ body {
     outline: none;
 }
 
-.nav-links a:focus {
-    box-shadow: 0 0 0 2px rgba(123, 181, 209, 0.3);
-    border-radius: 2px;
-}
-
 .nav-links a.active {
     color: var(--accent-blue);
-    border-bottom: 2px solid var(--accent-blue);
+    /*border-bottom: 2px solid var(--accent-blue);*/
 }
 
 /* Hero Section */

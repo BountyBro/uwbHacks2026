@@ -120,13 +120,12 @@ body {
 .module-hero {
     background-color: var(--pastel-blue);
     padding: 4rem 2rem;
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
 }
 
 .module-hero-content {
     max-width: 100%;
-    width: 80%;
-    margin: 0 auto;
     text-align: left;
 }
 

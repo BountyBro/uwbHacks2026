@@ -119,8 +119,8 @@ body {
 
 .module-hero {
     background-color: var(--pastel-blue);
-    padding: 4rem 2rem;
-    width: 80%;
+    padding: 6rem 14rem;
+    width: 100%;
     margin: 0 auto;
 }
 
@@ -346,22 +346,32 @@ body {
 }
 
 .container {
-    display: flex;      /* For segmenting columns. */
-    flex-wrap: wrap;    /* To accomodate smaller screens. */
-    gap: 70px;          /* Column gap width. */
+    display: flex;
+    /* For segmenting columns. */
+    flex-wrap: wrap;
+    /* To accomodate smaller screens. */
+    gap: 70px;
+    /* Column gap width. */
 }
 
 .column {
-    flex: 1;            /* Setting indiivudal column width to be equal. */
-    min-width: 250px;   /* Smaller screen threshold. */
-    text-align: center; /* Centering text in each column. */
+    flex: 1;
+    /* Setting indiivudal column width to be equal. */
+    min-width: 250px;
+    /* Smaller screen threshold. */
+    text-align: center;
+    /* Centering text in each column. */
 }
 
 .column img {
-    width: 60%;         /* Fitting image to prevent overflowing. */
-    height: auto;       /* Free aspect control based on width. */
-    border-radius: 50%; /* To make square images circular. */
-    margin: 10px;       /* Reducing cluttering around images. */
+    width: 60%;
+    /* Fitting image to prevent overflowing. */
+    height: auto;
+    /* Free aspect control based on width. */
+    border-radius: 50%;
+    /* To make square images circular. */
+    margin: 10px;
+    /* Reducing cluttering around images. */
 }
 
 /* Navigation Section */
@@ -493,6 +503,7 @@ body {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+
     .nav-content,
     .hero,
     .module-hero-content,
@@ -669,6 +680,7 @@ body {
 
 /* Print Styles */
 @media print {
+
     .navbar,
     .footer,
     .navigation-section {

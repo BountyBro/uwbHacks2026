@@ -714,6 +714,69 @@ body {
     color: #315768;
 }
 
+/* Text Clue Spotter Checkpoint */
+.text-clue-spotter {
+    margin-top: 2rem;
+}
+
+.text-spotter-shell {
+    border-left-color: var(--accent-green);
+}
+
+.text-spotter-card {
+    display: block;
+    min-height: 0;
+}
+
+.text-spotter-passage {
+    margin: 0;
+    font-size: 1.05rem;
+    color: var(--dark-text);
+}
+
+.text-spotter-instruction {
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+
+.text-spotter-choices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+}
+
+.text-spotter-choice {
+    justify-self: stretch;
+    text-align: left;
+    font-size: 0.98rem;
+}
+
+.text-spotter-choice-selected {
+    background-color: #eaf6ff;
+    border-color: var(--accent-blue);
+}
+
+.text-spotter-controls {
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+}
+
+.text-spotter-check,
+.text-spotter-reset,
+.text-spotter-next {
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 0.7rem 1rem;
+}
+
+.text-spotter-next:disabled,
+.text-spotter-check:disabled,
+.text-spotter-reset:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
 /* Footer */
 .footer {
     display: none;
@@ -877,6 +940,10 @@ body {
     }
 
     .pipeline-controls {
+        flex-direction: column;
+    }
+
+    .text-spotter-controls {
         flex-direction: column;
     }
 

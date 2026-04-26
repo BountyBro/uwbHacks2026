@@ -99,6 +99,32 @@
                 </ul>
             </section>
 
+            <section class="module-section text-clue-spotter" id="text-clue-spotter" aria-labelledby="text-clue-spotter-title">
+                <h2 id="text-clue-spotter-title">Learning Checkpoint</h2>
+                <p>Read each short passage, then select the answer choices that describe common AI text indicators. You can
+                    choose multiple clues before checking your answer.</p>
+
+                <div class="flashcard-shell text-spotter-shell" data-text-spotter-app>
+                    <p class="flashcard-progress" id="spotterProgress" aria-live="polite"></p>
+
+                    <div class="flashcard-card text-spotter-card">
+                        <p class="text-spotter-passage" id="spotterPassage"></p>
+                    </div>
+
+                    <p class="text-spotter-instruction">Select all answers that apply:</p>
+
+                    <div class="text-spotter-choices" id="spotterChoices" role="group" aria-label="Text clue choices"></div>
+
+                    <div class="text-spotter-controls" role="group" aria-label="Text clue controls">
+                        <button type="button" class="nav-link nav-next text-spotter-check" id="spotterCheck">Check Answer</button>
+                        <button type="button" class="nav-link nav-prev text-spotter-reset" id="spotterReset">Reset Selection</button>
+                        <button type="button" class="nav-link nav-next text-spotter-next" id="spotterNext" disabled>Next Passage -></button>
+                    </div>
+
+                    <p class="flashcard-feedback" id="spotterFeedback" aria-live="assertive"></p>
+                </div>
+            </section>
+
             <section class="module-section" id="built">
                 <h2>References</h2>
                 <p> [1] WT Librarians, "How to identify AI-generated content," Cornette Library InfoGuides: Teaching with AI, West Texas A&M University, 5 February 2026. [Online]. 
@@ -116,6 +142,222 @@
             </section>
         </article>
     </main>
+
+    <script>
+        (function initTextClueSpotter() {
+            const passages = [
+                {
+                    text: 'This topic is very important for everyone. It helps many people in many ways and creates many positive results.',
+                    clues: [
+                        {
+                            label: 'The text sounds too generic and lacks specifics.',
+                            isIndicator: true,
+                            reason: 'This is broad, generic language with no specific details.'
+                        },
+                        {
+                            label: 'The wording is repetitive and vague.',
+                            isIndicator: true,
+                            reason: 'Vague repetition is a common AI-style writing clue.'
+                        },
+                        {
+                            label: 'The text provides clear evidence and concrete examples.',
+                            isIndicator: false,
+                            reason: 'This passage does not provide concrete supporting details.'
+                        },
+                        {
+                            label: 'The writing shows nuanced reasoning.',
+                            isIndicator: false,
+                            reason: 'The passage is broad and does not show much depth or nuance.'
+                        }
+                    ]
+                },
+                {
+                    text: 'A city report found that 143% of residents preferred one transit route, proving the policy was universally accepted by everyone without exception.',
+                    clues: [
+                        {
+                            label: 'The text has hallucinated or impossible numbers.',
+                            isIndicator: true,
+                            reason: 'This is a numerical impossibility and may indicate hallucinated content.'
+                        },
+                        {
+                            label: 'The text makes an absolute claim with no uncertainty.',
+                            isIndicator: true,
+                            reason: 'Absolute claims without nuance are a common reliability warning sign.'
+                        },
+                        {
+                            label: 'The text mentions a report source.',
+                            isIndicator: false,
+                            reason: 'This phrase alone does not indicate AI generation.'
+                        },
+                        {
+                            label: 'The sentence uses normal punctuation.',
+                            isIndicator: false,
+                            reason: 'Using punctuation is normal and not an AI clue.'
+                        }
+                    ]
+                }
+            ];
+
+            const app = document.querySelector('[data-text-spotter-app]');
+            const progressEl = document.getElementById('spotterProgress');
+            const passageEl = document.getElementById('spotterPassage');
+            const choicesEl = document.getElementById('spotterChoices');
+            const feedbackEl = document.getElementById('spotterFeedback');
+            const checkBtn = document.getElementById('spotterCheck');
+            const resetBtn = document.getElementById('spotterReset');
+            const nextBtn = document.getElementById('spotterNext');
+
+            if (!app || !progressEl || !passageEl || !choicesEl || !feedbackEl || !checkBtn || !resetBtn || !nextBtn) {
+                return;
+            }
+
+            let currentIndex = 0;
+            let score = 0;
+            let selected = new Set();
+            let isChecked = false;
+
+            function getCurrentPassage() {
+                return passages[currentIndex];
+            }
+
+            function updateProgress() {
+                progressEl.textContent = `Passage ${currentIndex + 1} of ${passages.length} | Score: ${score}`;
+            }
+
+            function clearFeedback() {
+                feedbackEl.textContent = '';
+                feedbackEl.className = 'flashcard-feedback';
+            }
+
+            function renderChoices() {
+                const current = getCurrentPassage();
+                choicesEl.innerHTML = '';
+
+                current.clues.forEach((clue, clueIndex) => {
+                    const button = document.createElement('button');
+                    button.type = 'button';
+                    button.className = 'flashcard-btn text-spotter-choice';
+                    button.textContent = clue.label;
+                    button.setAttribute('aria-pressed', selected.has(clueIndex) ? 'true' : 'false');
+
+                    if (selected.has(clueIndex)) {
+                        button.classList.add('text-spotter-choice-selected');
+                    }
+
+                    button.addEventListener('click', function () {
+                        if (isChecked) {
+                            isChecked = false;
+                            checkBtn.disabled = false;
+                            nextBtn.disabled = true;
+                            clearFeedback();
+                        }
+
+                        if (selected.has(clueIndex)) {
+                            selected.delete(clueIndex);
+                        } else {
+                            selected.add(clueIndex);
+                        }
+
+                        renderChoices();
+                    });
+
+                    choicesEl.appendChild(button);
+                });
+            }
+
+            function renderPassage() {
+                const current = getCurrentPassage();
+                passageEl.textContent = current.text;
+                selected = new Set();
+                isChecked = false;
+
+                clearFeedback();
+
+                checkBtn.disabled = false;
+                resetBtn.disabled = false;
+                nextBtn.disabled = true;
+                nextBtn.textContent = currentIndex === passages.length - 1 ? 'Finish Checkpoint' : 'Next Passage ->';
+
+                renderChoices();
+                updateProgress();
+            }
+
+            function checkAnswers() {
+                if (isChecked) {
+                    return;
+                }
+
+                const current = getCurrentPassage();
+                const expected = current.clues
+                    .map(function (clue, idx) { return clue.isIndicator ? idx : -1; })
+                    .filter(function (idx) { return idx !== -1; });
+
+                const selectedSorted = Array.from(selected).sort();
+                const expectedSorted = expected.slice().sort();
+                const isCorrect = selectedSorted.length === expectedSorted.length &&
+                    selectedSorted.every(function (value, index) { return value === expectedSorted[index]; });
+
+                isChecked = true;
+                checkBtn.disabled = true;
+                clearFeedback();
+
+                const reasons = current.clues
+                    .filter(function (clue) { return clue.isIndicator; })
+                    .map(function (clue) { return clue.reason; });
+
+                if (isCorrect) {
+                    score += 1;
+                    feedbackEl.textContent = `Correct. ${reasons.join(' ')}`;
+                    feedbackEl.classList.add('flashcard-feedback-correct');
+                } else {
+                    feedbackEl.textContent = `Not quite. Focus on clues tied to generic language, repetition, or factual reliability. ${reasons.join(' ')}`;
+                    feedbackEl.classList.add('flashcard-feedback-incorrect');
+                }
+
+                updateProgress();
+                nextBtn.disabled = false;
+                nextBtn.focus();
+            }
+
+            checkBtn.addEventListener('click', checkAnswers);
+
+            resetBtn.addEventListener('click', function () {
+                selected = new Set();
+                isChecked = false;
+                checkBtn.disabled = false;
+                nextBtn.disabled = true;
+                clearFeedback();
+                renderChoices();
+            });
+
+            nextBtn.addEventListener('click', function () {
+                if (!isChecked) {
+                    return;
+                }
+
+                if (currentIndex === passages.length - 1) {
+                    feedbackEl.textContent = `Checkpoint complete. You scored ${score} out of ${passages.length}. The exercise has restarted so you can practice again.`;
+                    feedbackEl.className = 'flashcard-feedback flashcard-feedback-correct';
+                    currentIndex = 0;
+                    score = 0;
+                    selected = new Set();
+                    isChecked = false;
+                    checkBtn.disabled = false;
+                    nextBtn.disabled = true;
+                    passageEl.textContent = passages[currentIndex].text;
+                    renderChoices();
+                    updateProgress();
+                    nextBtn.textContent = 'Next Passage ->';
+                    return;
+                }
+
+                currentIndex += 1;
+                renderPassage();
+            });
+
+            renderPassage();
+        }());
+    </script>
 </body>
 
 </html>

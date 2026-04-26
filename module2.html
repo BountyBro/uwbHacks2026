@@ -30,52 +30,54 @@
 
     <main class="content-wrapper">
         <article class="article-content">
+            <section class="module-section" id="Purpose">
+                <h2>Purpose</h2>
+                <p>This module provides a more technical look at how to use AI effectively and responsibly. Regardless of what field
+                    you want to pursue, understanding how to interact with AI systems is becoming an essential skill. Learning how to prompt AI
+                    effectively prevents unnecessary extra usage, understanding how AI is integrated into software and workflows helps you
+                    leverage its capabilities and identify where it's being used, and being aware of ethical concerns ensures that you use AI in a way that's responsible
+                    and doesn't compromise your personal values or society.</p>
+            </section>
             <section class="module-section" id="prompting">
                 <h2>Prompting</h2>
-                <p>Prompting is the art and science of communicating with AI systems to get desired results. A
-                    well-crafted prompt provides clear instructions, context, and expectations that help AI systems
-                    understand what you're asking for.</p>
+                <p>Prompting is how you communicate with AI systems to get desired results. Here are some best practices for prompting [1].</p>
 
                 <ul class="section-bullets">
-                    <li><strong>Be Specific:</strong> Clear, detailed prompts produce better results. Instead of "write
-                        about AI," try "write a 500-word explanation of how neural networks work for high school
-                        students."</li>
-                    <li><strong>Provide Context:</strong> Help the AI understand your background and purpose. Explain
-                        who the audience is, what format you need, and how the output will be used.</li>
+                    <li><strong>Use detailed prompts:</strong> Clear, detailed prompts produce better results. Instead of "research AI history," try "provide links to recent studies on how AI has developed 
+                        over the past decade and give a brief summary of each one."</li>
+                    <li><strong>Provide Context:</strong> Help the AI understand your background and purpose by explaining the
+                        objectives of the task at hand before telling it what to do. This decreases
+                        the likelihood of misinterpretation and reduces the amount of tokens used.</li>
                     <li><strong>Set Constraints:</strong> Define boundaries like length, tone, style, or format. This
                         guides the AI to produce exactly what you need rather than generic output.</li>
                     <li><strong>Use Examples:</strong> Showing examples of desired output or style helps the AI
                         understand your expectations better than describing them verbally.</li>
-                    <li><strong>Iterate and Refine:</strong> Your first prompt may not produce perfect results. Refine
+                    <li><strong>Iterate and Refine:</strong> The first prompt may not produce perfect results. Refine
                         your prompt based on the AI's output, clarifying instructions or constraints as needed.</li>
                     <li><strong>Understand Limitations:</strong> Know what the AI system is designed to do and recognize
                         when it might hallucinate, provide outdated information, or misunderstand context.</li>
+                    <li><strong>Review the Outputs:</strong> Treat AI as a tool, rather than a replacement for human work.
+                        Review the outputs critically to ensure they meet your requirements and try to understand the content outputted.</li>
                 </ul>
             </section>
 
             <section class="module-section" id="integration">
                 <h2>Software Integration</h2>
-                <p>AI integration into software and workflows is transforming how we work. Whether through APIs,
-                    plugins, or built-in features, AI is becoming embedded in the tools we use daily.</p>
+                <p>AI integration into software and workflows is more prevalent in the tools we use daily.
+                    Here are some examples of where it can be seen today:</p>
 
                 <ul class="section-bullets">
-                    <li><strong>API Integration:</strong> Many AI services provide APIs that allow developers to
-                        integrate AI capabilities into applications. This enables custom solutions tailored to specific
-                        business needs.</li>
-                    <li><strong>Pre-built Tools:</strong> Companies offer ready-made AI tools for specific tasks—email
-                        assistance, content generation, image editing, data analysis. These require no technical
-                        knowledge to use.</li>
+                    <li><strong>Pre-built Tools:</strong> Companies offer AI tools for specific tasks, including content generation, 
+                        image editing, data analysis, and resource management. Some require no technical
+                        knowledge to use (ex. ChatGPT), while others are integrated into existing professional tools and still require
+                        and foundational level of knowledge (ex. Photoshop, GitHub Copilot).</li>
                     <li><strong>Workflow Automation:</strong> AI can automate repetitive tasks within existing
                         workflows. For example, automatically categorizing emails, scheduling meetings, or summarizing
                         documents.</li>
-                    <li><strong>Decision Support:</strong> AI systems analyze data and provide recommendations to help
-                        humans make better decisions. These range from financial predictions to medical diagnostics.
-                    </li>
                     <li><strong>Personalization:</strong> AI learns user preferences and tailors experiences
-                        accordingly. This includes product recommendations, content feeds, and customized learning
-                        paths.</li>
+                        accordingly. This includes product recommendations, content feeds, and navigational assistance (ex. Google Maps).</li>
                     <li><strong>Real-time Processing:</strong> Modern AI systems can process information in real-time,
-                        enabling applications like live translation, facial recognition, and autonomous decision-making.
+                        enabling applications like live translation, transcription, facial recognition, and autonomous decision-making (ex. self driving cars).
                     </li>
                 </ul>
             </section>
@@ -83,32 +85,75 @@
             <section class="module-section" id="ethical">
                 <h2>Ethical Concerns</h2>
                 <p>As AI systems become more powerful and prevalent, ethical considerations become increasingly
-                    important. Using AI responsibly means being aware of potential harms and actively working to
-                    mitigate them.</p>
+                    important. Regardless of whether you use AI, it's best to be aware of potential harms and what measures can be taken to
+                    mitigate them. Additional resources to learn more are available at the end of this section.</p>
 
                 <ul class="section-bullets">
-                    <li><strong>Bias and Fairness:</strong> AI systems can perpetuate or amplify biases present in
-                        training data. This can lead to unfair outcomes for certain groups. Developers must actively
-                        work to identify and reduce bias.</li>
-                    <li><strong>Privacy:</strong> AI systems often require large amounts of personal data. Organizations
-                        must protect user privacy, be transparent about data usage, and allow individuals control over
-                        their information.</li>
-                    <li><strong>Accountability:</strong> When AI systems make decisions affecting people's lives—hiring,
-                        lending, criminal justice—there must be clear accountability for outcomes and the ability to
-                        appeal or challenge decisions.</li>
-                    <li><strong>Transparency:</strong> People deserve to know when they're interacting with AI and
-                        understand how AI systems make decisions. "Black box" AI that provides no explanation raises
-                        ethical concerns.</li>
-                    <li><strong>Job Displacement:</strong> As AI automates tasks, some jobs may become obsolete. Society
-                        must thoughtfully address workforce transitions through retraining programs and policies that
-                        ensure benefits are broadly shared.</li>
-                    <li><strong>Misuse and Security:</strong> AI can be weaponized or used deceptively—deepfakes,
-                        personalized misinformation, autonomous weapons. Safeguards are essential to prevent harmful
-                        applications.</li>
+                    <li><strong>Algorithmic Bias:</strong> AI systems can perpetuate or amplify biases present in
+                        training data. This can lead to unfair outcomes for underrepresented groups, including racial minorities and women [2]. 
+                        Developers must actively work to identify and reduce bias, and users must be aware of potential bias in the systems they use.</li>
+                    <p></p>
+                <p style="padding-left: -3rem; text-indent: 2rem;"> To learn more about algorithmic bias: The documentary <a href="https://www.codedbias.com" target="_blank">"Coded Bias"</a> goes in depth about how it presents and its real-world consequences. </p>
+                    <li><strong>Privacy:</strong> AI systems often require large amounts of training data, from the Internet and the user. Organizations are
+                    often not transparent about how this data is used or shared, or hide it behind complex terms of services that are changed without notice [3]. There are also many debates on
+                    how copyrighted material (ex. music, art, literature) should be handled when training AI systems and how user information can be protected.</li>
+                    <li><strong>Malicious Content and Use:</strong> AI can be weaponized or used deceptively, generating deepfakes (AI replicas of real people), disinformation, or harmful content. 
+                        This can be used for scams, harassment, and inciting violence. Safeguards are essential to prevent harmful applications, but there's a lack of comprehensive federal regulation
+                        to address them [4]. As these technologies advance, the need for robust governance becomes increasingly critical.</li>
                     <li><strong>Environmental Impact:</strong> Training large AI models requires enormous computational
-                        resources. The environmental costs of this compute infrastructure are significant and often
-                        overlooked.</li>
+                        resources, causing significant usage of water, energy, and CO2 emissions [5]. Computational operations causes the datacenters to get very hot, so large amounts of water and energy are required for cooling. 
+                        This disproportionately impacts low-income communities, where datacenters are commonly located.</li>
+                    <li><strong>Transparency:</strong> Lack of AI disclosures means people can easily get misled by AI accounts and media. While AI content
+                    can be flagged, it's not a widespread implementation that's enforced. Children and elderly people are particularly vulnerable to misleading AI-generated content,
+                    which makes them more susceptible to manipulation [6]. This is also why teaching AI literacy is important (like this course!).</li>
+                    <li><strong>Sycophantic Responses:</strong> AI models are 49% more likely to affirm a user's thoughts compared to human observers [9]. On the extreme end, 
+                        this can make things extremely dangerous for users who are not mentally well or are planning something dangerous, including suicide or committing crimes. 
+                        In a more typical scenarios, if the user is asking for advice, the AI will respond in a way that affirms their feelings, even if it would be harmful. 
+                        This endless affirmation can make people more apathetic to their own actions and make them more likely to make bad decisions.
+                    <li><strong>Accountability:</strong> When AI systems make decisions affecting people's lives, such as in healthcare, finances, counseling, or 
+                        criminal justice, there's no clear accountability for outcomes [7]. In scenarios where AI fails to perform their task, there's no policy in place
+                    to determine who is liable for damages (the AI company? Third parties? Developers?). </li>
+                    <li><strong>Job Displacement:</strong> As AI automates more tasks, some jobs may become obsolete, especially in tech and creative industries [8].
+                    While AI provides quick (not necessarily great) outputs, normalization can devalue human work and creativity, especially within art, writing, and music industries.</li>
                 </ul>
+            </section>
+
+            <section class="module-section" id="built">
+                <h2>References</h2>
+                <p> [1] MIT Sloan Teaching & Learning Technologies, "Effective Prompts for AI: The Essentials," MIT Sloan Teaching & Learning Technologies. (n.d.)
+                    [Online]. Available: https://mitsloanedtech.mit.edu/ai/basics/effective-prompts/. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [2] A. U. Otokiti, H. Shih, and K. S. Williams, "Gender and racial bias unveiled: clinical artificial intelligence (AI) and machine learning (ML) algorithms are fanning the flames of inequity," Oxford Open Digital Health, vol. 3, 2025, doi: 10.1093/oodh/oqaf027. 
+                [Online]. Available: https://academic.oup.com/oodh/article/doi/10.1093/oodh/oqaf027/8279897. [Accessed: Apr. 25, 2026].
+                </p>
+                <p>
+                [3] Federal Trade Commission, "AI (and other) companies: Quietly changing your terms of service could be unfair or deceptive," FTC Tech Blog, 
+                February 2024. [Online]. Available: https://www.ftc.gov/policy/advocacy-research/tech-at-ftc/2024/02/ai-other-companies-quietly-changing-your-terms-service-could-be-unfair-or-deceptive. [Accessed Apr. 25, 2026].
+                <p>
+                [4] Ondato, "Deepfake laws explained: Global regulations and legal risks," Ondato Blog, January 2026. [Online]. 
+                Available: https://ondato.com/blog/deepfake-laws/. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [5] MIT News, "Explained: Generative AI's environmental impact," MIT News, January 2025. [Online]. 
+                Available: https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [6] World Economic Forum, "How does media and information literacy need to step up its game in the AI era?" World Economic Forum, 
+                October 2025. [Online]. Available: https://www.weforum.org/stories/2025/10/media-information-literacy-ai/. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [7] "Artificial intelligence in hospitals: Legal uncertainties and emerging risks for patient safety," National Institutes of Health, 
+                July 2025. [Online]. Available: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12835522/. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [8] UNCTAD, "Replacement of human artists by AI systems in creative industries," UNCTAD News, March 2024. [Online]. 
+                Available: https://unctad.org/news/replacement-human-artists-ai-systems-creative-industries. [Accessed Apr. 25, 2026].
+                </p>
+                <p>
+                [9] M. Cheng et al., "Sycophantic AI decreases prosocial intentions and promotes dependence," Science, vol. 391, no. 6792, 26 Mar 2026, doi: 10.1126/science.aec8352. [Online]. 
+                    Available: https://www.science.org/doi/10.1126/science.aec8352. [Accessed Apr. 25, 2026].</p>
+
             </section>
 
             <section class="navigation-section">

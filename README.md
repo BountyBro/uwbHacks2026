@@ -1,4 +1,4 @@
-# AI Literacy Learning Lab
+# LearnAI
 
 A comprehensive, interactive website dedicated to teaching artificial intelligence fundamentals to learners of all levels.
 
@@ -12,7 +12,7 @@ This website features an educational platform with three main learning modules:
 
 ## Design
 
-- **Color Scheme**: Pastel blue (#a8d8e8), pastel green (#a8e8d8), and white with purple accents (#d4a8e8)
+- **Color Scheme**: Pastel blue (#a8d8e8) and white (#ffffff)
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **Accessibility**: Clean, readable typography and high contrast colors
 
@@ -21,11 +21,14 @@ This website features an educational platform with three main learning modules:
 ```
 uwbHacks2026/
 ├── index.html          # Landing page
+├── aboutus.html        # "About Us" page
+├── contribute.html     # "Contribute" page
 ├── module1.html        # "How does AI work?" module
 ├── module2.html        # "How is AI used?" module
 ├── module3.html        # "How do you identify AI content?" module
 ├── styles.css          # Stylesheet with all design elements
 └── README.md           # This file
+└── Images              # Asset folder for page images and the favicon
 ```
 
 ## How to Run Locally
@@ -34,7 +37,7 @@ uwbHacks2026/
 
 1. Open Terminal and navigate to the project folder:
    ```bash
-   cd /Users/kyliechang/Documents/uwbHacks2026
+   cd /Users/[YourUserName]/Documents/uwbHacks2026
    ```
 
 2. Start a simple HTTP server:

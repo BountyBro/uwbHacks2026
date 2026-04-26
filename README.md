@@ -7,7 +7,7 @@ A comprehensive, interactive website dedicated to teaching artificial intelligen
 This website features an educational platform with three main learning modules:
 
 1. **How does AI work?** - Learn the fundamental concepts and mechanisms behind artificial intelligence systems
-2. **How is AI used?** - Explore real-world applications of AI across different industries
+2. **How is AI used?** - Explore real-world applications of AI across different industries and learn about ethical concerns
 3. **How do you identify AI content?** - Develop skills to recognize and critically evaluate AI-generated content
 
 ## Design

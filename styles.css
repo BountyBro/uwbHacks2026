@@ -84,14 +84,9 @@ body {
     outline: none;
 }
 
-.nav-links a:focus {
-    box-shadow: 0 0 0 2px rgba(123, 181, 209, 0.3);
-    border-radius: 2px;
-}
-
 .nav-links a.active {
     color: var(--accent-blue);
-    border-bottom: 2px solid var(--accent-blue);
+    /*border-bottom: 2px solid var(--accent-blue);*/
 }
 
 /* Hero Section */
@@ -104,7 +99,6 @@ body {
 
 .hero-content h1 {
     font-size: 2.8rem;
-    margin-bottom: 1rem;
     font-weight: 700;
     letter-spacing: -1px;
     line-height: 1.2;
@@ -199,9 +193,21 @@ body {
     content: "•";
     position: absolute;
     left: 0;
+    top: 0.2rem;
     color: var(--accent-green);
     font-weight: bold;
     font-size: 1.25rem;
+    line-height: 1;
+}
+
+/* Landing Page - Introduction Section */
+.introduction-section {
+    margin-bottom: 2rem;
+}
+
+.introduction-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
 /* Landing Page - Modules Section */
@@ -324,25 +330,16 @@ body {
     text-decoration: underline;
 }
 
-/* Intro Section */
-.intro-section {
-    margin-top: 3rem;
-    padding: 2rem;
-    background-color: var(--light-gray);
-    border-left: 4px solid var(--accent-blue);
+/* Landing Page - Why Section */
+.why-section {
+    margin-bottom: 2rem;
 }
 
-.intro-section h2 {
-    margin-top: 0;
+.why-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.intro-section p {
-    margin-bottom: 1rem;
-}
-
-.intro-section p:last-child {
-    margin-bottom: 0;
-}
 
 .container {
     display: flex;
@@ -351,6 +348,7 @@ body {
     /* To accomodate smaller screens. */
     gap: 70px;
     /* Column gap width. */
+    align-items: center;
 }
 
 .column {
@@ -367,8 +365,6 @@ body {
     /* Fitting image to prevent overflowing. */
     height: auto;
     /* Free aspect control based on width. */
-    border-radius: 50%;
-    /* To make square images circular. */
     margin: 10px;
     /* Reducing cluttering around images. */
 }

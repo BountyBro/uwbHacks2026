@@ -72,6 +72,27 @@
                         maintain and improve performance. This ongoing process keeps the system relevant as patterns and
                         conditions change.</li>
                 </ul>
+
+                <section class="ethics-flashcards pipeline-checkpoint" aria-labelledby="pipeline-checkpoint-title">
+                    <h3 id="pipeline-checkpoint-title" class="subsection-title">Learning Checkpoint</h3>
+                    <p>Drag each step into the numbered boxes in the order an AI system is typically built, then check your answer.</p>
+
+                    <div class="flashcard-shell pipeline-checkpoint-shell" data-pipeline-checkpoint>
+                        <div class="pipeline-bank" id="pipeline-bank" role="group" aria-label="Pipeline steps to choose from"></div>
+
+                        <div class="flashcard-card pipeline-sequence-wrap">
+                            <ol class="pipeline-sequence" id="pipeline-sequence" aria-label="Selected pipeline order"></ol>
+                        </div>
+
+                        <div class="flashcard-actions pipeline-controls">
+                            <button type="button" class="flashcard-btn" id="pipeline-check">Check Order</button>
+                            <button type="button" class="flashcard-btn" id="pipeline-reset">Reset</button>
+                            <button type="button" class="flashcard-btn" id="pipeline-hint">Show Hint</button>
+                        </div>
+
+                        <p class="flashcard-feedback pipeline-feedback" id="pipeline-feedback" role="status" aria-live="polite"></p>
+                    </div>
+                </section>
             </section>
 
             <section class="module-section" id="work">
@@ -112,6 +133,251 @@
             </section>
         </article>
     </main>
+
+    <script>
+        (function initPipelineCheckpoint() {
+            const pipelineSteps = [
+                "Data Collection",
+                "Feature Engineering",
+                "Model Selection",
+                "Training",
+                "Validation and Testing",
+                "Deployment",
+                "Refinement"
+            ];
+
+            const shell = document.querySelector("[data-pipeline-checkpoint]");
+            if (!shell) {
+                return;
+            }
+
+            const bank = document.getElementById("pipeline-bank");
+            const sequence = document.getElementById("pipeline-sequence");
+            const feedback = document.getElementById("pipeline-feedback");
+            const checkButton = document.getElementById("pipeline-check");
+            const resetButton = document.getElementById("pipeline-reset");
+            const hintButton = document.getElementById("pipeline-hint");
+
+            let bankSteps = [];
+            let selectedOrder = [];
+            let bankDropInitialized = false;
+
+            function createShuffledSteps() {
+                return pipelineSteps
+                    .map((step) => ({ step, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((entry) => entry.step);
+            }
+
+            function createDragPayload(source, step, index) {
+                return JSON.stringify({ source: source, step: step, index: index });
+            }
+
+            function readDragPayload(event) {
+                const raw = event.dataTransfer.getData("text/plain");
+                if (!raw) {
+                    return null;
+                }
+
+                try {
+                    return JSON.parse(raw);
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function renderBank() {
+                bank.innerHTML = "";
+
+                bankSteps.forEach((step) => {
+                    const button = document.createElement("button");
+                    button.type = "button";
+                    button.className = "pipeline-step";
+                    button.textContent = step;
+                    button.draggable = true;
+                    button.setAttribute("aria-label", "Select step: " + step);
+                    button.addEventListener("dragstart", (event) => {
+                        button.classList.add("pipeline-dragging");
+                        event.dataTransfer.effectAllowed = "move";
+                        event.dataTransfer.setData("text/plain", createDragPayload("bank", step, -1));
+                    });
+                    button.addEventListener("dragend", () => {
+                        button.classList.remove("pipeline-dragging");
+                    });
+
+                    bank.appendChild(button);
+                });
+
+                if (!bankDropInitialized) {
+                    bankDropInitialized = true;
+
+                    bank.addEventListener("dragover", (event) => {
+                        event.preventDefault();
+                        bank.classList.add("pipeline-bank-dragover");
+                    });
+
+                    bank.addEventListener("dragleave", () => {
+                        bank.classList.remove("pipeline-bank-dragover");
+                    });
+
+                    bank.addEventListener("drop", (event) => {
+                        event.preventDefault();
+                        bank.classList.remove("pipeline-bank-dragover");
+                        const payload = readDragPayload(event);
+
+                        if (!payload || payload.source !== "slot" || payload.index < 0) {
+                            return;
+                        }
+
+                        selectedOrder[payload.index] = null;
+                        if (!bankSteps.includes(payload.step)) {
+                            bankSteps.push(payload.step);
+                        }
+
+                        bankSteps.sort((a, b) => pipelineSteps.indexOf(a) - pipelineSteps.indexOf(b));
+                        renderBank();
+                        renderSequence();
+                    });
+                }
+            }
+
+            function renderSequence() {
+                sequence.innerHTML = "";
+
+                for (let i = 0; i < pipelineSteps.length; i += 1) {
+                    const listItem = document.createElement("li");
+                    listItem.className = "pipeline-slot";
+                    listItem.setAttribute("data-slot-index", String(i));
+
+                    listItem.addEventListener("dragover", (event) => {
+                        event.preventDefault();
+                        listItem.classList.add("pipeline-slot-dragover");
+                    });
+
+                    listItem.addEventListener("dragleave", () => {
+                        listItem.classList.remove("pipeline-slot-dragover");
+                    });
+
+                    listItem.addEventListener("drop", (event) => {
+                        event.preventDefault();
+                        listItem.classList.remove("pipeline-slot-dragover");
+                        const payload = readDragPayload(event);
+
+                        if (!payload || !payload.step) {
+                            return;
+                        }
+
+                        placeStepInSlot(payload, i);
+                    });
+
+                    if (selectedOrder[i]) {
+                        listItem.textContent = selectedOrder[i];
+                        listItem.classList.add("pipeline-slot-filled");
+                        listItem.draggable = true;
+
+                        listItem.addEventListener("dragstart", (event) => {
+                            listItem.classList.add("pipeline-dragging");
+                            event.dataTransfer.effectAllowed = "move";
+                            event.dataTransfer.setData("text/plain", createDragPayload("slot", selectedOrder[i], i));
+                        });
+                        listItem.addEventListener("dragend", () => {
+                            listItem.classList.remove("pipeline-dragging");
+                        });
+                    } else {
+                        listItem.textContent = "Step " + (i + 1);
+                        listItem.classList.add("pipeline-slot-empty");
+                    }
+
+                    sequence.appendChild(listItem);
+                }
+            }
+
+            function placeStepInSlot(payload, targetIndex) {
+                const targetStep = selectedOrder[targetIndex];
+
+                if (payload.source === "slot" && payload.index === targetIndex) {
+                    return;
+                }
+
+                if (payload.source === "bank") {
+                    bankSteps = bankSteps.filter((step) => step !== payload.step);
+
+                    if (targetStep) {
+                        bankSteps.push(targetStep);
+                    }
+
+                    selectedOrder[targetIndex] = payload.step;
+                }
+
+                if (payload.source === "slot") {
+                    if (targetStep) {
+                        selectedOrder[payload.index] = targetStep;
+                    } else {
+                        selectedOrder[payload.index] = null;
+                    }
+
+                    selectedOrder[targetIndex] = payload.step;
+                }
+
+                bankSteps.sort((a, b) => pipelineSteps.indexOf(a) - pipelineSteps.indexOf(b));
+
+                renderBank();
+                renderSequence();
+                feedback.textContent = "";
+                feedback.className = "flashcard-feedback pipeline-feedback";
+            }
+
+            function resetCheckpoint(message) {
+                bankSteps = createShuffledSteps();
+                selectedOrder = new Array(pipelineSteps.length).fill(null);
+                renderBank();
+                renderSequence();
+
+                feedback.className = "flashcard-feedback pipeline-feedback";
+                feedback.textContent = message || "";
+            }
+
+            function checkOrder() {
+                const placedCount = selectedOrder.filter(Boolean).length;
+
+                if (placedCount < pipelineSteps.length) {
+                    feedback.className = "flashcard-feedback pipeline-feedback flashcard-feedback-incorrect";
+                    feedback.textContent = "You still have " + (pipelineSteps.length - placedCount) + " step(s) left to place.";
+                    return;
+                }
+
+                let matches = 0;
+                let firstWrongIndex = -1;
+
+                for (let i = 0; i < pipelineSteps.length; i += 1) {
+                    if (selectedOrder[i] === pipelineSteps[i]) {
+                        matches += 1;
+                    } else if (firstWrongIndex === -1) {
+                        firstWrongIndex = i;
+                    }
+                }
+
+                if (matches === pipelineSteps.length) {
+                    feedback.className = "flashcard-feedback pipeline-feedback flashcard-feedback-correct";
+                    feedback.textContent = "Excellent. You got the full pipeline in order: 7/7.";
+                    return;
+                }
+
+                const correctStep = pipelineSteps[firstWrongIndex];
+                feedback.className = "flashcard-feedback pipeline-feedback flashcard-feedback-incorrect";
+                feedback.textContent = "Score: " + matches + "/7. First mismatch is position " + (firstWrongIndex + 1) + ". That slot should be " + correctStep + ".";
+            }
+
+            checkButton.addEventListener("click", checkOrder);
+            resetButton.addEventListener("click", () => resetCheckpoint("Order cleared. Try again from step 1."));
+            hintButton.addEventListener("click", () => {
+                feedback.className = "flashcard-feedback pipeline-feedback pipeline-feedback-hint";
+                feedback.textContent = "Hint: think from preparation to production: data, features, model, train, test, ship, improve.";
+            });
+
+            resetCheckpoint();
+        })();
+    </script>
 </body>
 
 </html>

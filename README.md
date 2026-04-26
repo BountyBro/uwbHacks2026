@@ -37,7 +37,7 @@ uwbHacks2026/
 
 1. Open Terminal and navigate to the project folder:
    ```bash
-   cd /Users/kyliechang/Documents/uwbHacks2026
+   cd /Users/[YourUserName]/Documents/uwbHacks2026
    ```
 
 2. Start a simple HTTP server:

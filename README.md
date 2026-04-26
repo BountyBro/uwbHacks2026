@@ -1,4 +1,4 @@
-# AI Literacy Learning Lab
+# LearnAI
 
 A comprehensive, interactive website dedicated to teaching artificial intelligence fundamentals to learners of all levels.
 

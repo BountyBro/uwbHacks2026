@@ -200,6 +200,16 @@ body {
     line-height: 1;
 }
 
+/* Landing Page - Introduction Section */
+.introduction-section {
+    margin-bottom: 2rem;
+}
+
+.introduction-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
 /* Landing Page - Modules Section */
 .modules-section {
     margin-bottom: 2rem;
@@ -320,25 +330,16 @@ body {
     text-decoration: underline;
 }
 
-/* Intro Section */
-.intro-section {
-    margin-top: 3rem;
-    padding: 2rem;
-    background-color: var(--light-gray);
-    border-left: 4px solid var(--accent-blue);
+/* Landing Page - Why Section */
+.why-section {
+    margin-bottom: 2rem;
 }
 
-.intro-section h2 {
-    margin-top: 0;
+.why-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
 }
 
-.intro-section p {
-    margin-bottom: 1rem;
-}
-
-.intro-section p:last-child {
-    margin-bottom: 0;
-}
 
 .container {
     display: flex;
@@ -347,6 +348,7 @@ body {
     /* To accomodate smaller screens. */
     gap: 70px;
     /* Column gap width. */
+    align-items: center;
 }
 
 .column {
@@ -363,8 +365,6 @@ body {
     /* Fitting image to prevent overflowing. */
     height: auto;
     /* Free aspect control based on width. */
-    border-radius: 50%;
-    /* To make square images circular. */
     margin: 10px;
     /* Reducing cluttering around images. */
 }
